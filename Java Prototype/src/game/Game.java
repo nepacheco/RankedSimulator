@@ -46,22 +46,14 @@ public class Game
 	
 	private void updateGameState()
 	{
-		if(t1.getRoundsWon() >= minimumRoundsToWin)
+		if(t1.getRoundsWon() >= minimumRoundsToWin || t2.getRoundsWon() >= minimumRoundsToWin)
 		{
 			if(t1.getRoundsWon()-t2.getRoundsWon() >= minimumWinningMargin)
 			{
 				t1.winGame();
 				gameInProgress = false;
 			}
-			else
-			{
-				overtime = true;
-				gameInProgress = true;
-			}
-		}
-		else if(t2.getRoundsWon() >= minimumRoundsToWin)
-		{
-			if(t2.getRoundsWon()-t1.getRoundsWon() >= minimumWinningMargin)
+			else if(t2.getRoundsWon()-t1.getRoundsWon() >= minimumWinningMargin)
 			{
 				t2.winGame();
 				gameInProgress = false;
@@ -72,10 +64,7 @@ public class Game
 				gameInProgress = true;
 			}
 		}
-		else
-		{
-			gameInProgress = true;
-		}
+
 		
 		if(gameInProgress)
 		{

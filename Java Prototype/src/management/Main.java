@@ -12,7 +12,7 @@ import game.Team;
 public class Main
 {
 	private static Random rand = new Random();
-	private static final int NUM_SIMULATIONS = 500;
+	private static final int NUM_SIMULATIONS = 10000;
 	private static int numDefenderEliminations = 0;
 	private static int numAttackerEliminations = 0;
 	private static int numDefuses = 0;
@@ -22,6 +22,8 @@ public class Main
 	
 	public static void main(String[] args)
 	{
+		long start_time = System.currentTimeMillis();
+		
 		for(int i = 0; i < NUM_SIMULATIONS; i++)
 		{
 			ArrayList<Player> teamList1 = new ArrayList<Player>();
@@ -41,6 +43,9 @@ public class Main
 		
 		double total = numAttackerEliminations + numDefenderEliminations + numTimeExpired + numDetonations + numDefuses;
 		
+		long end_time = System.currentTimeMillis();
+		System.out.println(end_time-start_time);
+
 		System.out.println("Time expired:             " + formatPercentage(numTimeExpired,total));
 		System.out.println("Attackers eliminated:     " + formatPercentage(numAttackerEliminations,total));
 		System.out.println("Spike defused:            " + formatPercentage(numDefuses,total));
