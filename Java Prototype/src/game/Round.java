@@ -6,11 +6,12 @@ public class Round
 {
 	private Team attackers;
 	private Team defenders;
-	private double probabilityOfInteraction = 0.09;
+	private double probabilityOfInteraction = 0.098;
 	private double roundTimer = 100.0;
 	private double roundStepInterval = 1.0;
 	private double spikeTimer = 45.0;
-	private double spikeStepInterval = 1.0;
+	private double spikeStepInterval = 1.43;
+	// https://www.metasrc.com/valorant/stats/maps
 	
 	
 	private static final int BUY_PHASE = 0;
