@@ -1,0 +1,39 @@
+%% Gaussian Distribution
+sigma = 1;
+mu = 0;
+
+pdf = @(x,mu,sigma) 1/(sigma*sqrt(2*pi))*exp(-(x-mu)^2/(2*sigma^2));
+
+
+num_samples = 100000;
+samples = zeros(1,num_samples);
+for i = 1:n
+    sample(1,i) = rand()
+end
+
+
+%% Gumbel
+close all; clear; clc;
+
+mu = 1500;
+beta = 1;
+range = 100:.1:2900;
+
+F = @(x) exp(-exp(-(x-mu)./beta));
+f = @(x) exp(-((x-mu)/beta + exp(-(x-mu)/beta)))*1/beta;
+x = @(P) -beta.*log(-log(P)) + mu;
+
+figure 
+hold on
+plot(-5:0.1:15,F(-5:0.1:15),'LineWidth',2)
+num_sims = 1000000;
+pairs = zeros(num_sims,2);
+for i = 1:num_sims
+    y = rand();
+    pairs(i,:) = [x(y),y];
+end
+plot(x(0:0.0001:1),0:0.0001:1,'r--','LineWidth',3)
+figure
+plot(-5:0.1:15,f(-5:0.1:15),'r-','LineWidth',5)
+hold on
+histogram(pairs(:,1),1000,'Normalization','pdf');
