@@ -2,7 +2,7 @@ package game;
 
 import java.util.ArrayList;
 
-public class Game
+class Game
 {
 	private Team t1;
 	private Team t2;
@@ -12,8 +12,9 @@ public class Game
 	private boolean gameInProgress = false;
 	private boolean overtime = false;
 	private boolean firstHalf = true;
+	private String winner;
 	
-	public Game(Team t1, Team t2, int minimumRoundsToWin, int minimumWinningMargin)
+	Game(Team t1, Team t2, int minimumRoundsToWin, int minimumWinningMargin)
 	{
 		this.t1 = t1;
 		this.t2 = t2;
@@ -21,7 +22,7 @@ public class Game
 		this.minimumRoundsToWin = Integer.max(this.minimumWinningMargin, minimumRoundsToWin);
 	}
 	
-	public void simulateGame()
+	void simulateGame()
 	{
 		gameInProgress = true;
 		updateGameState();
@@ -33,10 +34,11 @@ public class Game
 				generateRound(t2, t1);
 			updateGameState();
 		}
-		
-//		System.out.println("Team 1: " + t1.getRoundsWon());
-//		System.out.println("Team 2: " + t2.getRoundsWon());
-//		System.out.println("---------------------------");
+	}
+	
+	String getWinner()
+	{
+		return winner;
 	}
 	
 	private void updateGameState()
@@ -46,11 +48,13 @@ public class Game
 			if(t1.getNumRoundsWon()-t2.getNumRoundsWon() >= minimumWinningMargin)
 			{
 				t1.winGame();
+				winner = "Team 1";
 				gameInProgress = false;
 			}
 			else if(t2.getNumRoundsWon()-t1.getNumRoundsWon() >= minimumWinningMargin)
 			{
 				t2.winGame();
+				winner = "Team 2";
 				gameInProgress = false;
 			}
 			else

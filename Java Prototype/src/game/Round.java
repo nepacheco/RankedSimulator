@@ -1,8 +1,9 @@
 package game;
 
+import PlayerBase.Player;
 import management.Main;
 
-public class Round
+class Round
 {
 	private Team attackers;
 	private Team defenders;
@@ -27,7 +28,7 @@ public class Round
 	
 	private int roundState = BUY_PHASE;
 	
-	public Round(Team att, Team def)
+	Round(Team att, Team def)
 	{
 		this.attackers = att;
 		attackers.resetPlayers();
@@ -134,7 +135,7 @@ public class Round
 		
 		if(att != null && def != null)
 		{
-			double expWinPctAtt = 1.0/(1.0 + Math.pow(10.0, (def.getMmr() - att.getMmr())/400.0));
+			double expWinPctAtt = 1.0/(1.0 + Math.pow(10.0, (def.getTrueSkill() - att.getTrueSkill())/400.0));
 
 			if(Math.random() <= expWinPctAtt)
 			{

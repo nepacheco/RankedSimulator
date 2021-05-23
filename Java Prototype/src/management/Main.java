@@ -1,13 +1,13 @@
 package management;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
-import game.Game;
-import game.Player;
-import game.Team;
+import PlayerBase.Player;
+import PlayerBase.PlayerPopulation;
+import game.GameController;
+import matchMaker.MatchMakingSystem;
 
 public class Main
 {
@@ -47,10 +47,7 @@ public class Main
 			teamList2.add(new Player (rand.nextGaussian()+5));
 		}
 		
-		Team t1 = new Team(teamList1);
-		Team t2 = new Team(teamList2);
-		
-		new Game(t1, t2, 13, 2).simulateGame();
+		GameController.runValorantGame(teamList1, teamList2);
 	}
 	
 	public static void testSingleMatchup(double[] team1Ratings, double[] team2Ratings)
@@ -64,18 +61,20 @@ public class Main
 			teamList2.add(new Player (team2Ratings[j]));
 		}
 		
-		Team t1 = new Team(teamList1);
-		Team t2 = new Team(teamList2);
+		int t1Wins = 0;
+		int t2Wins = 0;
 		
 		for(int i = 0; i < NUM_SIMULATIONS; i++)
 		{
-			t1.resetTeam();
-			t2.resetTeam();
-			new Game(t1, t2, 13, 2).simulateGame();
+			String winner = (String) GameController.runValorantGame(teamList1, teamList2)[0];
+			if(winner == "Team 1")
+				t1Wins++;
+			else if(winner == "Team 2")
+				t2Wins++;
 		}
 		
-		System.out.println("Team 1 Wins: " + t1.getNumGamesWon());
-		System.out.println("Team 2 Wins: " + t2.getNumGamesWon());
+		System.out.println("Team 1 Wins: " + t1Wins);
+		System.out.println("Team 2 Wins: " + t2Wins);
 	}
 	
 	public static void recordAttackerEliminationWin()

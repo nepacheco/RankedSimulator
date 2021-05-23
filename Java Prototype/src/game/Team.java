@@ -3,16 +3,24 @@ package game;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Team
+import PlayerBase.Player;
+
+class Team
 {
 	private Random rand = new Random();
 	private ArrayList<Player> players;
 	private int numRoundsWon = 0;
 	private int numGamesWon = 0;
 	
-	public Team(ArrayList<Player> players)
+	Team(ArrayList<Player> players)
 	{
 		this.players = players;
+	}
+	
+	Team(Player[] players)
+	{
+		for (Player p : players)
+			this.players.add(p);
 	}
 	
 	void resetPlayers()
@@ -23,7 +31,7 @@ public class Team
 		}
 	}
 	
-	public void resetTeam()
+	void resetTeam()
 	{
 		resetPlayers();
 		numRoundsWon = 0;
@@ -61,7 +69,7 @@ public class Team
 	/**
 	 * @return the roundsWon
 	 */
-	public int getNumRoundsWon()
+	int getNumRoundsWon()
 	{
 		return numRoundsWon;
 	}
@@ -69,7 +77,7 @@ public class Team
 	/**
 	 * @param roundsWon the roundsWon to set
 	 */
-	public void setNumRoundsWon(int roundsWon)
+	void setNumRoundsWon(int roundsWon)
 	{
 		this.numRoundsWon = roundsWon;
 	}
@@ -87,7 +95,7 @@ public class Team
 	/**
 	 * @return the gamesWon
 	 */
-	public int getNumGamesWon()
+	int getNumGamesWon()
 	{
 		return numGamesWon;
 	}

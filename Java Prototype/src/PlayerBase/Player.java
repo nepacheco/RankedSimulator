@@ -1,37 +1,37 @@
-package game;
+package PlayerBase;
 
 public class Player
 {
-	private double mmr;
+	private double trueSkill;
 	
 	private double combatScore = 0;
 	private int numKills = 0;
 	private int numAssists = 0;
 	private int numDeaths = 0;
 	
-	static final int AFK = 0;
-	static final int DEAD = 1;
-	static final int ALIVE = 2;
+	public static final int AFK = 0;
+	public static final int DEAD = 1;
+	public static final int ALIVE = 2;
 	private int currentState = ALIVE;
 	private int roundsPlayed;
 	
-	public Player(double mmr)
+	public Player(double skill)
 	{
-		this.mmr = mmr;
+		this.trueSkill = skill;
 	}
 	
-	void resetRound()
+	public void resetRound()
 	{
 		currentState = ALIVE;
 	}
 	
-	void winGame()
+	public void winGame()
 	{
 		
 	}
 
 	/**
-	 * @return the combatScore
+	 * @return (double) The Player's current combat score.
 	 */
 	public double getCombatScore()
 	{
@@ -47,7 +47,7 @@ public class Player
 	}
 
 	/**
-	 * @return the roundsPlayed
+	 * @return (int) The number of rounds played.
 	 */
 	public int getRoundsPlayed()
 	{
@@ -63,26 +63,26 @@ public class Player
 	}
 
 	/**
-	 * @return the currentState
+	 * @return (int) The Player's current state value.
 	 */
 	public int getCurrentState()
 	{
 		return currentState;
 	}
 	
-	void addKill()
+	public void addKill()
 	{
 		if(currentState == ALIVE)
 			numKills++;
 	}
 	
-	void addAssist()
+	public void addAssist()
 	{
 		if(currentState == ALIVE)
 			numAssists++;
 	}
 	
-	void addDeath()
+	public void addDeath()
 	{
 		if(currentState == ALIVE)
 			numDeaths++;
@@ -90,10 +90,10 @@ public class Player
 	}
 
 	/**
-	 * @return the mmr
+	 * @return (double) The Player's true skill value.
 	 */
-	public double getMmr()
+	public double getTrueSkill()
 	{
-		return mmr;
+		return trueSkill;
 	}
 }
