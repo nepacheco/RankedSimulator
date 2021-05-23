@@ -30,9 +30,9 @@ public class Round
 	public Round(Team att, Team def)
 	{
 		this.attackers = att;
-		attackers.reset();
+		attackers.resetPlayers();
 		this.defenders = def;
-		defenders.reset();
+		defenders.resetPlayers();
 	}
 	
 	void simulateRound()
@@ -134,9 +134,9 @@ public class Round
 		
 		if(att != null && def != null)
 		{
-			double totalMmr = att.getMmr() + def.getMmr();
-			
-			if(Math.random()*totalMmr <= att.getMmr())
+			double expWinPctAtt = 1.0/(1.0 + Math.pow(10.0, (def.getMmr() - att.getMmr())/400.0));
+
+			if(Math.random() <= expWinPctAtt)
 			{
 				att.addKill();
 				def.addDeath();

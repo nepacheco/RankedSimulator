@@ -12,7 +12,7 @@ import game.Team;
 public class Main
 {
 	private static Random rand = new Random();
-	private static final int NUM_SIMULATIONS = 100000;
+	private static final int NUM_SIMULATIONS = 10000;
 	private static int numDefenderEliminations = 0;
 	private static int numAttackerEliminations = 0;
 	private static int numDefuses = 0;
@@ -25,24 +25,57 @@ public class Main
 	{
 		start_time = System.currentTimeMillis();
 		
+//		for(int i = 0; i < NUM_SIMULATIONS; i++)
+//		{
+//			runRandomGame();
+//		}
+//		
+//		printResults();
+		
+		testSingleMatchup(new double[] {1600, 1400, 1500, 1400, 1600},
+				new double[] {1500, 1500, 1500, 1500, 1500});
+	}
+	
+	public static void runRandomGame()
+	{
+		ArrayList<Player> teamList1 = new ArrayList<Player>();
+		ArrayList<Player> teamList2 = new ArrayList<Player>();
+		
+		for(int j = 0; j < 5; j++)
+		{
+			teamList1.add(new Player (rand.nextGaussian()+5));
+			teamList2.add(new Player (rand.nextGaussian()+5));
+		}
+		
+		Team t1 = new Team(teamList1);
+		Team t2 = new Team(teamList2);
+		
+		new Game(t1, t2, 13, 2).simulateGame();
+	}
+	
+	public static void testSingleMatchup(double[] team1Ratings, double[] team2Ratings)
+	{
+		ArrayList<Player> teamList1 = new ArrayList<Player>();
+		ArrayList<Player> teamList2 = new ArrayList<Player>();
+		
+		for(int j = 0; j < 5; j++)
+		{
+			teamList1.add(new Player (team1Ratings[j]));
+			teamList2.add(new Player (team2Ratings[j]));
+		}
+		
+		Team t1 = new Team(teamList1);
+		Team t2 = new Team(teamList2);
+		
 		for(int i = 0; i < NUM_SIMULATIONS; i++)
 		{
-			ArrayList<Player> teamList1 = new ArrayList<Player>();
-			ArrayList<Player> teamList2 = new ArrayList<Player>();
-			
-			for(int j = 0; j < 5; j++)
-			{
-				teamList1.add(new Player (rand.nextGaussian()+5));
-				teamList2.add(new Player (rand.nextGaussian()+5));
-			}
-			
-			Team t1 = new Team(teamList1);
-			Team t2 = new Team(teamList2);
-			
-			new Game(new Team(teamList1), new Team(teamList2), 13, 2).simulateGame();
+			t1.resetTeam();
+			t2.resetTeam();
+			new Game(t1, t2, 13, 2).simulateGame();
 		}
-			
-		printResults();
+		
+		System.out.println("Team 1 Wins: " + t1.getNumGamesWon());
+		System.out.println("Team 2 Wins: " + t2.getNumGamesWon());
 	}
 	
 	public static void recordAttackerEliminationWin()

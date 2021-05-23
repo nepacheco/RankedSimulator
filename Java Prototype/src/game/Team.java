@@ -7,19 +7,26 @@ public class Team
 {
 	private Random rand = new Random();
 	private ArrayList<Player> players;
-	private int roundsWon = 0;
+	private int numRoundsWon = 0;
+	private int numGamesWon = 0;
 	
 	public Team(ArrayList<Player> players)
 	{
 		this.players = players;
 	}
 	
-	void reset()
+	void resetPlayers()
 	{
 		for(Player p : players)
 		{
 			p.resetRound();
 		}
+	}
+	
+	public void resetTeam()
+	{
+		resetPlayers();
+		numRoundsWon = 0;
 	}
 	
 	Player getRandomActivePlayer()
@@ -40,29 +47,31 @@ public class Team
 	
 	void winRound()
 	{
-		setRoundsWon(getRoundsWon() + 1);
+		setNumRoundsWon(getNumRoundsWon() + 1);
 	}
 	
 	void winGame()
 	{
 		for(Player player : players)
 			player.winGame();
+		
+		numGamesWon++;
 	}
 
 	/**
 	 * @return the roundsWon
 	 */
-	public int getRoundsWon()
+	public int getNumRoundsWon()
 	{
-		return roundsWon;
+		return numRoundsWon;
 	}
 
 	/**
 	 * @param roundsWon the roundsWon to set
 	 */
-	public void setRoundsWon(int roundsWon)
+	public void setNumRoundsWon(int roundsWon)
 	{
-		this.roundsWon = roundsWon;
+		this.numRoundsWon = roundsWon;
 	}
 	
 	private ArrayList<Player> getActivePlayers()
@@ -73,5 +82,13 @@ public class Team
 				activePlayers.add(p);
 		
 		return activePlayers;
+	}
+
+	/**
+	 * @return the gamesWon
+	 */
+	public int getNumGamesWon()
+	{
+		return numGamesWon;
 	}
 }

@@ -34,11 +34,6 @@ public class Game
 			updateGameState();
 		}
 		
-		if(t1.getRoundsWon() > t2.getRoundsWon())
-			t1.winGame();
-		else if(t2.getRoundsWon() > t1.getRoundsWon())
-			t2.winGame();
-		
 //		System.out.println("Team 1: " + t1.getRoundsWon());
 //		System.out.println("Team 2: " + t2.getRoundsWon());
 //		System.out.println("---------------------------");
@@ -46,14 +41,14 @@ public class Game
 	
 	private void updateGameState()
 	{
-		if(t1.getRoundsWon() >= minimumRoundsToWin || t2.getRoundsWon() >= minimumRoundsToWin)
+		if(t1.getNumRoundsWon() >= minimumRoundsToWin || t2.getNumRoundsWon() >= minimumRoundsToWin)
 		{
-			if(t1.getRoundsWon()-t2.getRoundsWon() >= minimumWinningMargin)
+			if(t1.getNumRoundsWon()-t2.getNumRoundsWon() >= minimumWinningMargin)
 			{
 				t1.winGame();
 				gameInProgress = false;
 			}
-			else if(t2.getRoundsWon()-t1.getRoundsWon() >= minimumWinningMargin)
+			else if(t2.getNumRoundsWon()-t1.getNumRoundsWon() >= minimumWinningMargin)
 			{
 				t2.winGame();
 				gameInProgress = false;
