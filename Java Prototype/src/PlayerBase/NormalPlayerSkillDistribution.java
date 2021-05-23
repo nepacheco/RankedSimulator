@@ -11,7 +11,8 @@ public class NormalPlayerSkillDistribution extends PlayerSkillDistribution
 	public double getSkillValue()
 	{
 		double mean = (maxSkillValue + minSkillValue)/2.0;
-		double stdDev = (maxSkillValue - minSkillValue)/8.0;
+		// 5.5 standard deviations = 1 in 26,330,254 (0.0000037979125%) of population will hit min or max value)
+		double stdDev = (maxSkillValue - minSkillValue)/11.0;
 		
 		double skillValue = (rand.nextGaussian() * stdDev) + mean;
 		
