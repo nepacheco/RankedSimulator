@@ -31,22 +31,37 @@ DATA = [2800 1
 plot(DATA(:,1),DATA(:,2))
 
 
-%% Gumbel Plotting
-gumbel_pdf = @(x,mu,beta) 1/beta.*exp(-((x-mu)./beta + exp(-(x-mu)./beta)));
-mu = 0.5;
-beta = 2.0;
-points = -5:0.01:15;
-plot(points,gumbel_pdf(points,mu,beta));
-%%
-min_elo = 100;
-max_elo = 3000;
+%% Chess.com data from 4 years ago
 
-ea = @(diff) (1./(1 + 10.^(diff./400)));
-
-ea_static = ea(-100);
-
-total_prob = 0;
-for i = 5:9
-total_prob = nchoosek(i,5)*ea_static^(5)*(1-ea_static)^(i-5) + total_prob;
-end
-
+ DATA = [50 1
+     150 8
+     250 89
+     350 567
+     450 2152
+     550 6207
+     650 12998
+     750 22350
+     850 33089
+     950 44406
+     1050 52985
+     1150 58129
+     1250 56125
+     1350 49562
+     1450 39781
+     1550 28660
+     1650 18326
+     1750 10078
+     1850 4711
+     1950 1964
+     2050 460
+     2150 89
+     2250 41
+     2350 23
+     2450 12
+     2550 4
+     2650 0
+     2750 2];
+DATA(:,2) =  DATA(:,2)./sum(DATA(:,2));
+ plot(DATA(:,1),DATA(:,2),'o-','LineWidth',2)
+ 
+ 
