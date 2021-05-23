@@ -5,8 +5,8 @@ import java.util.Random;
 
 public class PlayerPopulation
 {
-	private static ArrayList<Player> availablePlayers;
-	private static ArrayList<Player> unavailablePlayers;
+	private static ArrayList<Player> availablePlayers = new ArrayList<Player>();
+	private static ArrayList<Player> unavailablePlayers = new ArrayList<Player>();
 	
 	public PlayerPopulation(int totalNumPlayers, PlayerSkillDistribution dist)
 	{

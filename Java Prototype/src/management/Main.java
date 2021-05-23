@@ -6,6 +6,7 @@ import java.util.Random;
 
 import PlayerBase.Player;
 import PlayerBase.PlayerPopulation;
+import PlayerBase.UniformPlayerSkillDistribution;
 import game.GameController;
 import matchMaker.MatchMakingSystem;
 
@@ -52,13 +53,17 @@ public class Main
 	
 	public static void testSingleMatchup(double[] team1Ratings, double[] team2Ratings)
 	{
+		MatchMakingSystem mm = new MatchMakingSystem();
+		PlayerPopulation pp = new PlayerPopulation(1000, new UniformPlayerSkillDistribution(1200, 1800));
+		Player[][] players = mm.createMatchup(pp, 2, 5);
+		
 		ArrayList<Player> teamList1 = new ArrayList<Player>();
 		ArrayList<Player> teamList2 = new ArrayList<Player>();
 		
 		for(int j = 0; j < 5; j++)
 		{
-			teamList1.add(new Player (team1Ratings[j]));
-			teamList2.add(new Player (team2Ratings[j]));
+			teamList1.add(players[0][j]);
+			teamList2.add(players[1][j]);
 		}
 		
 		int t1Wins = 0;

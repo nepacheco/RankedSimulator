@@ -14,11 +14,24 @@ public class MatchMakingSystem
 	// TODO make teams
 	public Player[][] createMatchup(PlayerPopulation playerPop, int numTeams, int numPlayersPerTeam)
 	{
-		for(int numSearches = 0; numSearches < 2000; numSearches++)
+		Player[][] players = new Player[numTeams][numPlayersPerTeam];
+		
+		for(int t = 0; t < numTeams; t++)
 		{
-			playerPop.getRandomAvailablePlayer(1500, 300);
+			for(int p = 0; p < numPlayersPerTeam; p++)
+			{
+				for(int numSearches = 0; numSearches < 2000; numSearches++)
+				{
+					Player player = playerPop.getRandomAvailablePlayer(1500, 300);
+					if(player != null)
+					{
+						players[t][p] = player;
+						break;
+					}
+				}
+			}
 		}
 		
-		return null;
+		return players;
 	}
 }
