@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
+import PlayerBase.NormalPlayerSkillDistribution;
 import PlayerBase.Player;
 import PlayerBase.PlayerPopulation;
 import PlayerBase.UniformPlayerSkillDistribution;
@@ -54,23 +55,24 @@ public class Main
 	public static void testSingleMatchup(double[] team1Ratings, double[] team2Ratings)
 	{
 		MatchMakingSystem mm = new MatchMakingSystem();
-		PlayerPopulation pp = new PlayerPopulation(1000, new UniformPlayerSkillDistribution(1200, 1800));
-		Player[][] players = mm.createMatchup(pp, 2, 5);
-		
-		ArrayList<Player> teamList1 = new ArrayList<Player>();
-		ArrayList<Player> teamList2 = new ArrayList<Player>();
-		
-		for(int j = 0; j < 5; j++)
-		{
-			teamList1.add(players[0][j]);
-			teamList2.add(players[1][j]);
-		}
+		PlayerPopulation pp = new PlayerPopulation(1000000, new NormalPlayerSkillDistribution(1200, 1800));
 		
 		int t1Wins = 0;
 		int t2Wins = 0;
 		
 		for(int i = 0; i < NUM_SIMULATIONS; i++)
 		{
+			Player[][] players = mm.createMatchup(pp, 2, 5);
+			
+			ArrayList<Player> teamList1 = new ArrayList<Player>();
+			ArrayList<Player> teamList2 = new ArrayList<Player>();
+			
+			for(int j = 0; j < 5; j++)
+			{
+				teamList1.add(players[0][j]);
+				teamList2.add(players[1][j]);
+			}
+			
 			String winner = (String) GameController.runValorantGame(teamList1, teamList2)[0];
 			if(winner == "Team 1")
 				t1Wins++;

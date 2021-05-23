@@ -8,5 +8,11 @@ abstract class PlayerSkillDistribution
 	protected double maxSkillValue = 0;
 	protected Random rand = new Random();
 	
+	public PlayerSkillDistribution(double minSkillValue, double maxSkillValue)
+	{
+		this.minSkillValue = minSkillValue;
+		this.maxSkillValue = maxSkillValue;
+	}
+	
 	public abstract double getSkillValue();
 }
