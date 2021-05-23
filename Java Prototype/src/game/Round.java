@@ -1,16 +1,18 @@
 package game;
 
+import PlayerBase.Player;
 import management.Main;
 
-public class Round
+class Round
 {
 	private Team attackers;
 	private Team defenders;
-	private double probabilityOfInteraction = 0.09;
+	private double probabilityOfInteraction = 0.098;
 	private double roundTimer = 100.0;
 	private double roundStepInterval = 1.0;
 	private double spikeTimer = 45.0;
-	private double spikeStepInterval = 1.0;
+	private double spikeStepInterval = 1.43;
+	// https://www.metasrc.com/valorant/stats/maps
 	
 	
 	private static final int BUY_PHASE = 0;
@@ -26,12 +28,12 @@ public class Round
 	
 	private int roundState = BUY_PHASE;
 	
-	public Round(Team att, Team def)
+	Round(Team att, Team def)
 	{
 		this.attackers = att;
-		attackers.reset();
+		attackers.resetPlayers();
 		this.defenders = def;
-		defenders.reset();
+		defenders.resetPlayers();
 	}
 	
 	void simulateRound()
@@ -133,9 +135,9 @@ public class Round
 		
 		if(att != null && def != null)
 		{
-			double totalMmr = att.getMmr() + def.getMmr();
-			
-			if(Math.random()*totalMmr <= att.getMmr())
+			double expWinPctAtt = 1.0/(1.0 + Math.pow(10.0, (def.getTrueSkill() - att.getTrueSkill())/400.0));
+
+			if(Math.random() <= expWinPctAtt)
 			{
 				att.addKill();
 				def.addDeath();
