@@ -1,8 +1,8 @@
-package PlayerBase;
+package SkillDistributions;
 
 import java.util.Random;
 
-abstract class PlayerSkillDistribution
+public abstract class PlayerSkillDistribution
 {
 	protected double minSkillValue = 0;
 	protected double maxSkillValue = 0;
@@ -16,17 +16,17 @@ abstract class PlayerSkillDistribution
 	
 	public double getSkillValueBounded()
 	{
-		double skill = this.getSkillValue();
+		double skillValue = this.getSkillValue();
 
 		// If getting the skill from the distribution causes the skill to be greater than the max skill rating
 		// or less than the minimum skill rating, repoll the distribution. This is done via recursion.
-		if ((skill > this.maxSkillValue) || (skill < this.minSkillValue))
+		if ((skillValue > this.maxSkillValue) || (skillValue < this.minSkillValue))
 		{
-			skill = this.getSkillValueBounded();
+			skillValue = this.getSkillValueBounded();
 		}
-		return skill;
+		return skillValue;
 
 	}
 	
-	public abstract double getSkillValue();
+	abstract double getSkillValue();
 }

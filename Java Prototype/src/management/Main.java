@@ -4,10 +4,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
-import PlayerBase.NormalPlayerSkillDistribution;
 import PlayerBase.Player;
 import PlayerBase.PlayerPopulation;
-import PlayerBase.UniformPlayerSkillDistribution;
+import SkillDistributions.NormalPlayerSkillDistribution;
+import SkillDistributions.UniformPlayerSkillDistribution;
 import game.GameController;
 import matchMaker.MatchMakingSystem;
 

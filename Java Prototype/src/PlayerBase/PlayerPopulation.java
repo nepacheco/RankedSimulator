@@ -3,6 +3,8 @@ package PlayerBase;
 import java.util.ArrayList;
 import java.util.Random;
 
+import SkillDistributions.PlayerSkillDistribution;
+
 public class PlayerPopulation
 {
 	private static ArrayList<Player> availablePlayers = new ArrayList<Player>();
@@ -12,7 +14,7 @@ public class PlayerPopulation
 	{
 		for(int count = 0; count < totalNumPlayers; count++)
 		{
-			availablePlayers.add(new Player(dist.getSkillValue()));
+			availablePlayers.add(new Player(dist.getSkillValueBounded()));
 		}
 	}
 	
