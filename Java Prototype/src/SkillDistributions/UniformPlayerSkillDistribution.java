@@ -1,4 +1,4 @@
-package PlayerBase;
+package SkillDistributions;
 
 public class UniformPlayerSkillDistribution extends PlayerSkillDistribution
 {
@@ -8,7 +8,7 @@ public class UniformPlayerSkillDistribution extends PlayerSkillDistribution
 	}
 
 	@Override
-	public double getSkillValue()
+	double getSkillValue()
 	{
 		return (rand.nextDouble()*(maxSkillValue - minSkillValue) + minSkillValue);
 	}

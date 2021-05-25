@@ -1,4 +1,4 @@
-package PlayerBase;
+package SkillDistributions;
 
 public class NormalPlayerSkillDistribution extends PlayerSkillDistribution
 {
@@ -8,7 +8,7 @@ public class NormalPlayerSkillDistribution extends PlayerSkillDistribution
 	}
 	
 	@Override
-	public double getSkillValue()
+	double getSkillValue()
 	{
 		double mean = (maxSkillValue + minSkillValue)/2.0;
 		// 5.5 standard deviations = 1 in 26,330,254 (0.0000037979125%) of population will hit min or max value)

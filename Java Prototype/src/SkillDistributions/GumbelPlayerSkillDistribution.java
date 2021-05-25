@@ -1,4 +1,4 @@
-package PlayerBase;
+package SkillDistributions;
 
 public class GumbelPlayerSkillDistribution extends PlayerSkillDistribution {
 
@@ -8,7 +8,7 @@ public class GumbelPlayerSkillDistribution extends PlayerSkillDistribution {
     }
 
     @Override
-    public double getSkillValue() {
+    double getSkillValue() {
         double skill = 0;
         // minProb is the probability at which a value of 100 or lower will be returned
         double minProb = 1.9E-8; // From RandomSampling.m based on std deviations of normal distribution
