@@ -15,12 +15,7 @@ public class NormalPlayerSkillDistribution extends PlayerSkillDistribution
 		double stdDev = (maxSkillValue - minSkillValue)/11.0;
 		
 		double skillValue = (rand.nextGaussian() * stdDev) + mean;
-		
-		if(skillValue < minSkillValue)
-			skillValue = minSkillValue;
-		else if(skillValue > maxSkillValue)
-			skillValue = maxSkillValue;
-		
+
 		return skillValue;
 	}
 	
