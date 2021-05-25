@@ -18,16 +18,19 @@ samples = zeros(1,num_samples);
 % beta =  275.9377;
 % mu = 826607021078931725/830626025293671;
 % beta = 1808476725365964800/5814382177055697;
-mu = 8423446256269630/8064330342657;
-beta = 2814749767106560/8064330342657;
-range = 100:.1:2900;
+% mu = 8423446256269630/8064330342657;
+% beta = 2814749767106560/8064330342657;
+max_rating = 2900;
+min_rating = 100;
+range = min_rating:.1:max_rating;
 max_prob = 0.999999981000000;
 min_prob = 1.900000001775482e-08;
 interval_prob = 0.01;
 prob_range = min_prob:interval_prob:max_prob;
 
-max_rating = 2900;
-min_rating = 100;
+beta = (max_rating*2.5 - min_rating/2.5)/(log(-log(min_prob)) - log(-log(max_prob)));
+mu = min_rating/2.5 + beta*log(-log(min_prob));
+
 
 F = @(x) exp(-exp(-(x-mu)./beta));
 f = @(x) exp(-((x-mu)/beta + exp(-(x-mu)/beta)))*1/beta;
